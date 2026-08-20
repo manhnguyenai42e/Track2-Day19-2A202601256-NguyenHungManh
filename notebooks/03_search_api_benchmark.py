@@ -36,9 +36,13 @@ proc = subprocess.Popen(
     cwd=str(ROOT),
 )
 
-# Đợi server up + warm (Searcher.from_corpus loads embeddings + indexes 1000 docs)
+# Đợi server up + warm (Searcher.from_corpus loads embeddings + indexes 1000 docs).
+# Budget generous (up to 30 min) — first-run CPU-bound embedding on a slow/loaded
+# machine can take much longer than the "usual" ~30-60s.
 URL = "http://localhost:8000"
-for _ in range(300):
+MAX_WAIT_S = 1800
+t_start = time.time()
+while time.time() - t_start < MAX_WAIT_S:
     try:
         r = httpx.get(f"{URL}/healthz", timeout=2.0)
         if r.status_code == 200 and r.json().get("ready"):
@@ -47,7 +51,7 @@ for _ in range(300):
         pass
     time.sleep(1)
 else:
-    raise RuntimeError("API didn't become ready within 300s")
+    raise RuntimeError(f"API didn't become ready within {MAX_WAIT_S}s")
 
 print(httpx.get(f"{URL}/healthz").json())
 

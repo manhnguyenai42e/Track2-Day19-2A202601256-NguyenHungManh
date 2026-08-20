@@ -85,7 +85,7 @@ for p in sorted(FEAST_DATA.glob("*.parquet")):
 
 # %%
 res = subprocess.run(
-    [sys.executable, "-m", "feast.cli", "apply"],
+    [sys.executable, "-m", "feast.cli.cli", "apply"],
     cwd=str(FEAST_DIR),
     capture_output=True, text=True, check=False,
 )
@@ -105,7 +105,7 @@ assert res.returncode == 0, f"feast apply failed: {res.stderr}"
 # %%
 end_dt = NOW.strftime("%Y-%m-%dT%H:%M:%S")
 res = subprocess.run(
-    [sys.executable, "-m", "feast.cli", "materialize-incremental", end_dt],
+    [sys.executable, "-m", "feast.cli.cli", "materialize-incremental", end_dt],
     cwd=str(FEAST_DIR),
     capture_output=True, text=True, check=False,
 )
@@ -186,7 +186,10 @@ else:
 import pandas as pd
 entity_df = pd.DataFrame({
     "user_id": ["u_001", "u_002", "u_003"],
-    "event_timestamp": [NOW - timedelta(hours=2), NOW - timedelta(hours=1), NOW],
+    # Query "as of now" for all 3 -- each user's synthetic profile row is
+    # timestamped up to 47h in the past (see make_user_profile), so "now" is
+    # always >= the feature's event_timestamp and every row gets a match.
+    "event_timestamp": [NOW, NOW, NOW],
 })
 
 historical = fs.get_historical_features(

@@ -161,8 +161,8 @@ print(f"\n'lift ảo' sẽ mất khi lên production: {auc_lat - auc_pit:+.3f} A
 repo = ROOT / "app" / "feast_repo_ondemand"
 subprocess.run([sys.executable, str(ROOT / "scripts" / "gen_spend.py")], check=True,
                capture_output=True)
-subprocess.run([sys.executable, "-m", "feast.cli", "apply"], cwd=repo, check=True, capture_output=True)
-subprocess.run([sys.executable, "-m", "feast.cli", "materialize-incremental", "2027-01-01T00:00:00"],
+subprocess.run([sys.executable, "-m", "feast.cli.cli", "apply"], cwd=repo, check=True, capture_output=True)
+subprocess.run([sys.executable, "-m", "feast.cli.cli", "materialize-incremental", "2027-01-01T00:00:00"],
                cwd=repo, check=True, capture_output=True)
 print("feast apply + materialize OK")
 

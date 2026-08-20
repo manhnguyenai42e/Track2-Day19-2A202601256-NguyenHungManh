@@ -7817,7 +7817,7 @@ Maps to slide §6 (Feast Feature Store) + deliverable bullet 3.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">_setup</span>  <span class="c1"># noqa: F401</span>
@@ -7849,12 +7849,12 @@ Maps to slide §6 (Feast Feature Store) + deliverable bullet 3.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=301513a2">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=301513a2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">NOW</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -7903,6 +7903,22 @@ Maps to slide §6 (Feast Feature Store) + deliverable bullet 3.</p>
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Wrote 3 Parquet sources to D:\Workspace\Track2-Day19-2A202601256-NguyenHungManh\app\feast_repo\data
+  item_popularity.parquet  9.7 KB
+  query_velocity.parquet  2.3 KB
+  user_profile.parquet  2.8 KB
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a1ae65da">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7915,16 +7931,16 @@ Chạy <code>feast apply</code> để Feast đọc file definition và ghi vào 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9c87c3d8">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9c87c3d8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"feast.cli"</span><span class="p">,</span> <span class="s2">"apply"</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"feast.cli.cli"</span><span class="p">,</span> <span class="s2">"apply"</span><span class="p">],</span>
     <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">FEAST_DIR</span><span class="p">),</span>
     <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
@@ -7935,6 +7951,132 @@ Chạy <code>feast apply</code> để Feast đọc file definition và ghi vào 
     <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"feast apply failed: </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>STDOUT:
+No project found in the repository. Using project name lab19 defined in feature_store.yaml
+Applying changes for project lab19
+Updated feature view item_popularity_features
+	batch_source: type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "D:\\Workspace\\Track2-Day19-2A202601256-NguyenHungManh\\app\\feast_repo\\data\\item_popularity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "item_popularity_source"
+meta {
+  created_timestamp {
+    seconds: 1787211993
+    nanos: 957986000
+  }
+  last_updated_timestamp {
+    seconds: 1787211994
+    nanos: 59729000
+  }
+}
+ -&gt; type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "D:\\Workspace\\Track2-Day19-2A202601256-NguyenHungManh\\app\\feast_repo\\data\\item_popularity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "item_popularity_source"
+meta {
+  created_timestamp {
+    seconds: 1787215624
+    nanos: 960321000
+  }
+  last_updated_timestamp {
+    seconds: 1787215624
+    nanos: 960321000
+  }
+}
+
+Updated feature view user_profile_features
+	batch_source: type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "D:\\Workspace\\Track2-Day19-2A202601256-NguyenHungManh\\app\\feast_repo\\data\\user_profile.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "user_profile_source"
+meta {
+  created_timestamp {
+    seconds: 1787211993
+    nanos: 957986000
+  }
+  last_updated_timestamp {
+    seconds: 1787211994
+    nanos: 59729000
+  }
+}
+ -&gt; type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "D:\\Workspace\\Track2-Day19-2A202601256-NguyenHungManh\\app\\feast_repo\\data\\user_profile.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "user_profile_source"
+meta {
+  created_timestamp {
+    seconds: 1787215624
+    nanos: 960321000
+  }
+  last_updated_timestamp {
+    seconds: 1787215624
+    nanos: 960321000
+  }
+}
+
+Updated feature view query_velocity_features
+	batch_source: type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "D:\\Workspace\\Track2-Day19-2A202601256-NguyenHungManh\\app\\feast_repo\\data\\query_velocity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "query_velocity_source"
+meta {
+  created_timestamp {
+    seconds: 1787211993
+    nanos: 957986000
+  }
+  last_updated_timestamp {
+    seconds: 1787211994
+    nanos: 59729000
+  }
+}
+ -&gt; type: BATCH_FILE
+timestamp_field: "event_timestamp"
+file_options {
+  uri: "D:\\Workspace\\Track2-Day19-2A202601256-NguyenHungManh\\app\\feast_repo\\data\\query_velocity.parquet"
+}
+data_source_class_type: "feast.infra.offline_stores.file_source.FileSource"
+name: "query_velocity_source"
+meta {
+  created_timestamp {
+    seconds: 1787215624
+    nanos: 960321000
+  }
+  last_updated_timestamp {
+    seconds: 1787215624
+    nanos: 960321000
+  }
+}
+
+
+No changes to infrastructure
+
+</pre>
 </div>
 </div>
 </div>
@@ -7951,17 +8093,17 @@ Chạy <code>feast apply</code> để Feast đọc file definition và ghi vào 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=62183416">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=62183416">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">end_dt</span> <span class="o">=</span> <span class="n">NOW</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S"</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"feast.cli"</span><span class="p">,</span> <span class="s2">"materialize-incremental"</span><span class="p">,</span> <span class="n">end_dt</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"feast.cli.cli"</span><span class="p">,</span> <span class="s2">"materialize-incremental"</span><span class="p">,</span> <span class="n">end_dt</span><span class="p">],</span>
     <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">FEAST_DIR</span><span class="p">),</span>
     <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
@@ -7971,6 +8113,24 @@ Chạy <code>feast apply</code> để Feast đọc file definition và ghi vào 
     <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">stderr</span><span class="p">[</span><span class="o">-</span><span class="mi">500</span><span class="p">:])</span>
 <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"materialize failed: </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Materializing <span class="ansi-green-intense-fg ansi-bold">3</span> feature views to <span class="ansi-green-intense-fg ansi-bold">2026-08-20 08:46:59+00:00</span> into the <span class="ansi-green-intense-fg ansi-bold">sqlite</span> online store.
+
+<span class="ansi-green-intense-fg ansi-bold">item_popularity_features</span> from <span class="ansi-green-intense-fg ansi-bold">2026-08-20 07:46:18+00:00</span> to <span class="ansi-green-intense-fg ansi-bold">2026-08-20 08:46:59+00:00</span>:
+<span class="ansi-green-intense-fg ansi-bold">user_profile_features</span> from <span class="ansi-green-intense-fg ansi-bold">2026-08-20 07:46:18+00:00</span> to <span class="ansi-green-intense-fg ansi-bold">2026-08-20 08:46:59+00:00</span>:
+<span class="ansi-green-intense-fg ansi-bold">query_velocity_features</span> from <span class="ansi-green-intense-fg ansi-bold">2026-08-20 07:46:18+00:00</span> to <span class="ansi-green-intense-fg ansi-bold">2026-08-20 08:46:59+00:00</span>:
+
+</pre>
 </div>
 </div>
 </div>
@@ -7988,12 +8148,12 @@ Rubric threshold: P99 &lt; 10ms cho lookup khi online store là SQLite local
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3de4e525">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3de4e525">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -8024,6 +8184,20 @@ Rubric threshold: P99 &lt; 10ms cho lookup khi online store là SQLite local
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Single lookup: 33.48ms
+{'user_id': 'u_001', 'topic_affinity': 'cloud', 'preferred_language': 'vi', 'reading_speed_wpm': 187, 'queries_last_hour': 11, 'distinct_topics_24h': 4}
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4290709">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8035,12 +8209,12 @@ Rubric threshold: P99 &lt; 10ms cho lookup khi online store là SQLite local
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bc6375eb">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bc6375eb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">latencies</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -8071,6 +8245,23 @@ Rubric threshold: P99 &lt; 10ms cho lookup khi online store là SQLite local
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Online lookup latency over 100 calls:
+  P50 = 0.24ms
+  P95 = 0.51ms
+  P99 = 0.86ms
+PASS — online lookup P99 &lt; 10ms (0.86ms)
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fe60b6d7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8084,18 +8275,21 @@ Rubric threshold: P99 &lt; 10ms cho lookup khi online store là SQLite local
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1ccd4389">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1ccd4389">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="n">entity_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
     <span class="s2">"user_id"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"u_001"</span><span class="p">,</span> <span class="s2">"u_002"</span><span class="p">,</span> <span class="s2">"u_003"</span><span class="p">],</span>
-    <span class="s2">"event_timestamp"</span><span class="p">:</span> <span class="p">[</span><span class="n">NOW</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">NOW</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">NOW</span><span class="p">],</span>
+    <span class="c1"># Query "as of now" for all 3 -- each user's synthetic profile row is</span>
+    <span class="c1"># timestamped up to 47h in the past (see make_user_profile), so "now" is</span>
+    <span class="c1"># always &gt;= the feature's event_timestamp and every row gets a match.</span>
+    <span class="s2">"event_timestamp"</span><span class="p">:</span> <span class="p">[</span><span class="n">NOW</span><span class="p">,</span> <span class="n">NOW</span><span class="p">,</span> <span class="n">NOW</span><span class="p">],</span>
 <span class="p">})</span>
 
 <span class="n">historical</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_historical_features</span><span class="p">(</span>
@@ -8107,6 +8301,22 @@ Rubric threshold: P99 &lt; 10ms cho lookup khi online store là SQLite local
 <span class="p">)</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">historical</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>  user_id           event_timestamp  reading_speed_wpm topic_affinity
+0   u_003 2026-08-20 08:46:59+00:00                201       database
+1   u_002 2026-08-20 08:46:59+00:00                194       security
+2   u_001 2026-08-20 08:46:59+00:00                187          cloud
+</pre>
 </div>
 </div>
 </div>

@@ -7841,7 +7841,7 @@ index + query vectors đó. Không cần GPU, không cần Docker.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>d:\Workspace\Track2-Day19-2A202601256-NguyenHungManh\.venv\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+<pre>D:\Workspace\Track2-Day19-2A202601256-NguyenHungManh\.venv\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
   from .autonotebook import tqdm as notebook_tqdm
 </pre>
 </div>
@@ -8005,12 +8005,12 @@ CPU-bound, batch=64 là sweet spot). Upsert vào Qdrant collection <code>lab19</
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=43265c3e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=43265c3e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Embed + upsert toàn bộ corpus</span>
@@ -8035,6 +8035,19 @@ CPU-bound, batch=64 là sweet spot). Upsert vào Qdrant collection <code>lab19</
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Indexed: 1000 vectors
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f78f51ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8048,12 +8061,12 @@ topic, dùng Qdrant payload filter.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cbd99d94">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cbd99d94">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"cloud computing và tự động mở rộng"</span>
@@ -8065,6 +8078,25 @@ topic, dùng Qdrant payload filter.</p>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hits</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. [</span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s1">'topic'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">] score=</span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Query: 'cloud computing và tự động mở rộng'
+Top-5:
+  1. [    cloud] score=0.804  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  2. [    cloud] score=0.787  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  3. [    cloud] score=0.775  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  4. [    cloud] score=0.774  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  5. [ data_eng] score=0.763  Data engineering: phân vùng theo ngày để tối ưu query
+</pre>
 </div>
 </div>
 </div>
@@ -8081,12 +8113,12 @@ trong doc. Chạy lại với query 100% paraphrase, không có chữ "cloud":</
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2b1b0ebf">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2b1b0ebf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">query2</span> <span class="o">=</span> <span class="s2">"phương pháp tự động mở rộng hạ tầng theo lưu lượng người dùng"</span>
@@ -8097,6 +8129,24 @@ trong doc. Chạy lại với query 100% paraphrase, không có chữ "cloud":</
 <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hits2</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s1">'topic'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">] score=</span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Query (paraphrase): 'phương pháp tự động mở rộng hạ tầng theo lưu lượng người dùng'
+  [    cloud] score=0.805  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  [    cloud] score=0.805  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  [    cloud] score=0.803  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  [    cloud] score=0.800  Điện toán đám mây: tự động mở rộng theo lưu lượng
+  [    cloud] score=0.800  Điện toán đám mây: tự động mở rộng theo lưu lượng
+</pre>
 </div>
 </div>
 </div>
