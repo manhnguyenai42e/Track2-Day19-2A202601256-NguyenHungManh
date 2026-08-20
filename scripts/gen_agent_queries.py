@@ -20,6 +20,11 @@ import sys
 import warnings
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+
 warnings.filterwarnings("ignore")
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -65,8 +70,9 @@ def main() -> int:
         print(f"missing {corpus} -- run `make seed` first")
         return 1
 
-    print("building index (embeds 1000 docs, ~15 s)…")
+    print("building index (embeds 1000 docs, ~15 s)...", flush=True)
     index = FilteredIndex.from_searcher(Searcher.from_corpus(corpus))
+    print("index built, computing ground truth...", flush=True)
 
     out = ROOT / "data" / "agent_queries.jsonl"
     everything = lambda d: True                       # noqa: E731

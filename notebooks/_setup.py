@@ -26,3 +26,8 @@ if str(_REPO_ROOT) not in sys.path:
 _BIN = Path(sys.executable).parent
 if str(_BIN) not in os.environ.get("PATH", "").split(os.pathsep):
     os.environ["PATH"] = f"{_BIN}{os.pathsep}{os.environ.get('PATH', '')}"
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")

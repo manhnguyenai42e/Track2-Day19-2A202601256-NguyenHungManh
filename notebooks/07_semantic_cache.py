@@ -26,6 +26,7 @@
 # %%
 import _setup  # noqa: F401
 import json
+import os
 import warnings
 from pathlib import Path
 
@@ -37,7 +38,7 @@ from qdrant_client import QdrantClient
 from app.cache import SemanticCache
 
 DATA = Path(_setup.__file__).resolve().parent.parent / "data"
-embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5", threads=os.cpu_count())
 client = QdrantClient(":memory:")
 
 # %% [markdown]

@@ -19,6 +19,7 @@
 # %%
 import _setup  # noqa: F401
 import json
+import os
 import statistics
 from pathlib import Path
 
@@ -40,23 +41,24 @@ tokenized = [(d["title"] + " " + d["text"]).lower().split() for d in docs]
 bm25 = BM25Okapi(tokenized)
 
 # Vector
-embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5", threads=os.cpu_count())
 client = QdrantClient(":memory:")
 client.create_collection(
     collection_name="lab19",
     vectors_config=VectorParams(size=384, distance=Distance.COSINE),
 )
-BATCH = 64
-points = []
-for start in range(0, len(docs), BATCH):
-    batch = docs[start:start + BATCH]
-    texts = [d["title"] + " " + d["text"] for d in batch]
-    vectors = list(embedder.embed(texts))
-    for i, (d, v) in enumerate(zip(batch, vectors)):
-        points.append(PointStruct(
-            id=start + i, vector=v.tolist(),
-            payload={"doc_id": d["doc_id"], "topic": d["topic"]},
-        ))
+
+all_texts = [d["title"] + " " + d["text"] for d in docs]
+all_vectors = list(embedder.embed(all_texts, batch_size=64))
+
+points = [
+    PointStruct(
+        id=i,
+        vector=v.tolist(),
+        payload={"doc_id": d["doc_id"], "topic": d["topic"]},
+    )
+    for i, (d, v) in enumerate(zip(docs, all_vectors))
+]
 client.upsert(collection_name="lab19", points=points)
 print(f"BM25 + vector indices ready ({len(docs)} docs)")
 

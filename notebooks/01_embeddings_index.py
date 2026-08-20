@@ -16,6 +16,7 @@
 # %%
 import _setup  # noqa: F401  -- adds repo root to sys.path
 import json
+import os
 from pathlib import Path
 
 from fastembed import TextEmbedding
@@ -51,7 +52,7 @@ print(json.dumps(docs[0], ensure_ascii=False, indent=2))
 # > Cho lab này dùng `bge-small-en` để mọi laptop chạy được nhanh.
 
 # %%
-embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+embedder = TextEmbedding(model_name="BAAI/bge-small-en-v1.5", threads=os.cpu_count())
 sample = list(embedder.embed(["cloud computing tiếng Việt"]))[0]
 print(f"Vector dim: {len(sample)}")
 print(f"First 8 values: {sample[:8].tolist()}")
@@ -79,22 +80,18 @@ client.create_collection(
 # **Hint:** xem `app/search.py` `_build_vector_index()` để tham khảo pattern.
 
 # %%
-# TODO: implement the embed + upsert loop here.
-# Expected outcome: client.count("lab19") == 1000
-# (~30 seconds on first run as fastembed downloads the model.)
+# Embed + upsert toàn bộ corpus
+all_texts = [d["title"] + " " + d["text"] for d in docs]
+all_vectors = list(embedder.embed(all_texts, batch_size=64))
 
-BATCH = 64
-points: list[PointStruct] = []
-for start in range(0, len(docs), BATCH):
-    batch = docs[start:start + BATCH]
-    texts = [d["title"] + " " + d["text"] for d in batch]
-    vectors = list(embedder.embed(texts))
-    for i, (d, v) in enumerate(zip(batch, vectors)):
-        points.append(PointStruct(
-            id=start + i,
-            vector=v.tolist(),
-            payload={"doc_id": d["doc_id"], "topic": d["topic"], "title": d["title"]},
-        ))
+points = [
+    PointStruct(
+        id=i,
+        vector=v.tolist(),
+        payload={"doc_id": d["doc_id"], "topic": d["topic"], "title": d["title"]},
+    )
+    for i, (d, v) in enumerate(zip(docs, all_vectors))
+]
 
 client.upsert(collection_name="lab19", points=points)
 n_indexed = client.count(collection_name="lab19").count
